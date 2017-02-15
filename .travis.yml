@@ -1,0 +1,16 @@
+# references:
+# * http://www.objc.io/issue-6/travis-ci.html
+# * https://github.com/supermarin/xcpretty#usage
+
+language: objective-c
+cache: cocoapods
+podfile: TestProject/Podfile
+before_install:
+- gem install cocoapods # Since Travis is not always on latest version
+- pod install --project-directory=TestProject
+osx_image: xcode8.2
+script:
+- open -b com.apple.iphonesimulator
+- sleep 10
+- set -o pipefail && xcodebuild test -workspace TestProject/TestProject.xcworkspace -scheme Tests-iOS -destination 'platform=iOS Simulator,name=iPhone 6,OS=10.2' | xcpretty
+- set -o pipefail && xcodebuild test -workspace TestProject/TestProject.xcworkspace -scheme Tests-macOS -sdk macosx | xcpretty

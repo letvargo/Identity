@@ -1,0 +1,14 @@
+use_frameworks!
+
+#install! 'cocoapods',
+#    :deterministic_uuids => false
+
+target 'Tests-iOS' do
+    platform :ios, '8.0'
+    pod 'Identity’, :path => '../'
+end
+
+target 'Tests-macOS’ do
+    platform :osx, '10.10'
+    pod 'Identity’, :path => '../'
+end
